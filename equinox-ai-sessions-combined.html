@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Equinox AI Sessions — Combined Reference</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0f12;
+    --surface: #151820;
+    --surface2: #1c2030;
+    --border: #252a38;
+    --accent: #4fffb0;
+    --accent2: #4fa8ff;
+    --accent3: #ff7b54;
+    --accent4: #e879f9;
+    --text: #c8d0e0;
+    --text-muted: #6b7a99;
+    --heading: #eef2ff;
+    --s1-color: #4fffb0;
+    --s2-color: #4fa8ff;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    padding: 2rem 1rem 5rem;
+  }
+
+  .container { max-width: 880px; margin: 0 auto; }
+
+  /* ── Master Header ── */
+  .master-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .master-header .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.6rem;
+  }
+
+  .master-header h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--heading);
+    margin-bottom: 0.5rem;
+  }
+
+  .master-header p {
+    font-size: 13px;
+    color: var(--text-muted);
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  .session-pills {
+    display: flex;
+    gap: 0.8rem;
+    justify-content: center;
+    margin-top: 1.2rem;
+    flex-wrap: wrap;
+  }
+
+  .session-pill {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 12px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+  }
+
+  .pill-s1 {
+    background: rgba(79,255,176,0.08);
+    border: 1px solid rgba(79,255,176,0.3);
+    color: var(--s1-color);
+  }
+
+  .pill-s2 {
+    background: rgba(79,168,255,0.08);
+    border: 1px solid rgba(79,168,255,0.3);
+    color: var(--s2-color);
+  }
+
+  /* ── Master TOC ── */
+  .master-toc {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 3.5rem;
+  }
+
+  .toc-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .toc-sessions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 580px) { .toc-sessions { grid-template-columns: 1fr; } }
+
+  .toc-group-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .toc-group-label.s1 { color: var(--s1-color); border-color: rgba(79,255,176,0.2); }
+  .toc-group-label.s2 { color: var(--s2-color); border-color: rgba(79,168,255,0.2); }
+
+  .toc-group ol { padding-left: 1.2rem; }
+  .toc-group li { margin: 0.3rem 0; }
+  .toc-group a { text-decoration: none; font-size: 13px; }
+  .toc-group.s1 a { color: var(--s1-color); }
+  .toc-group.s2 a { color: var(--s2-color); }
+  .toc-group a:hover { text-decoration: underline; }
+
+  /* ── Session Banner ── */
+  .session-banner {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.2rem 1.5rem;
+    border-radius: 10px;
+    margin-bottom: 2.5rem;
+    margin-top: 1rem;
+  }
+
+  .session-banner.s1 {
+    background: rgba(79,255,176,0.05);
+    border: 1px solid rgba(79,255,176,0.2);
+  }
+
+  .session-banner.s2 {
+    background: rgba(79,168,255,0.05);
+    border: 1px solid rgba(79,168,255,0.2);
+  }
+
+  .session-badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 22px;
+    font-weight: 600;
+    min-width: 52px;
+    text-align: center;
+  }
+
+  .session-badge.s1 { color: var(--s1-color); }
+  .session-badge.s2 { color: var(--s2-color); }
+
+  .session-banner-info {}
+
+  .session-banner-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--heading);
+  }
+
+  .session-banner-sub {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-family: 'IBM Plex Mono', monospace;
+    margin-top: 2px;
+  }
+
+  /* ── Section ── */
+  section { margin-bottom: 2.5rem; }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .section-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  .section-num.s1 {
+    color: var(--s1-color);
+    background: rgba(79,255,176,0.08);
+    border: 1px solid rgba(79,255,176,0.2);
+  }
+
+  .section-num.s2 {
+    color: var(--s2-color);
+    background: rgba(79,168,255,0.08);
+    border: 1px solid rgba(79,168,255,0.2);
+  }
+
+  h2 { font-size: 1.12rem; font-weight: 600; color: var(--heading); }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .card h3 {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--accent2);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.5rem;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  .card p, .card li { color: var(--text); font-size: 14px; }
+  .card ul { padding-left: 1.1rem; }
+  .card li { margin: 0.3rem 0; }
+
+  .callout {
+    border-left: 3px solid var(--accent3);
+    background: rgba(255,123,84,0.05);
+    padding: 0.8rem 1rem;
+    border-radius: 0 6px 6px 0;
+    margin-top: 0.8rem;
+  }
+  .callout p { font-size: 13px; color: var(--text); }
+  .callout strong { color: var(--accent3); }
+  .callout.green { border-left-color: var(--accent); background: rgba(79,255,176,0.05); }
+  .callout.green strong { color: var(--accent); }
+  .callout.blue { border-left-color: var(--accent2); background: rgba(79,168,255,0.05); }
+  .callout.blue strong { color: var(--accent2); }
+  .callout.purple { border-left-color: var(--accent4); background: rgba(232,121,249,0.05); }
+  .callout.purple strong { color: var(--accent4); }
+
+  .flow {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0.8rem 0;
+  }
+
+  .flow-box {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.4rem 0.8rem;
+    font-size: 12px;
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--heading);
+    white-space: nowrap;
+  }
+
+  .flow-arrow { color: var(--text-muted); font-size: 16px; }
+
+  .tag {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-right: 0.4rem;
+    margin-bottom: 0.3rem;
+  }
+  .tag-green { background: rgba(79,255,176,0.1); color: var(--accent); border: 1px solid rgba(79,255,176,0.2); }
+  .tag-blue  { background: rgba(79,168,255,0.1); color: var(--accent2); border: 1px solid rgba(79,168,255,0.2); }
+  .tag-orange{ background: rgba(255,123,84,0.1); color: var(--accent3); border: 1px solid rgba(255,123,84,0.2); }
+  .tag-purple{ background: rgba(232,121,249,0.1); color: var(--accent4); border: 1px solid rgba(232,121,249,0.2); }
+
+  .five-elements {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 0.8rem;
+    margin-top: 0.5rem;
+  }
+
+  .element-chip {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.7rem 1rem;
+    text-align: center;
+  }
+
+  .element-chip .num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--accent);
+    display: block;
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+
+  .element-chip .elabel { font-size: 12px; color: var(--text); font-weight: 600; }
+  .element-chip .sub { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+  }
+  @media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
+
+  .model-compare {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 0.7rem;
+    margin-top: 0.5rem;
+  }
+
+  .model-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.8rem 1rem;
+  }
+  .model-card .mname {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--heading);
+    margin-bottom: 0.3rem;
+  }
+  .model-card .mdesc { font-size: 12px; color: var(--text-muted); }
+  .model-card.selected { border-color: rgba(79,255,176,0.4); }
+  .model-card.selected .mname { color: var(--accent); }
+
+  .action-item {
+    display: flex;
+    gap: 0.8rem;
+    align-items: flex-start;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .action-owner {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .action-text { font-size: 14px; color: var(--text); }
+
+  hr.divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2rem 0;
+  }
+
+  hr.session-divider {
+    border: none;
+    border-top: 2px solid var(--border);
+    margin: 4rem 0 3rem;
+    position: relative;
+  }
+
+  hr.session-divider::after {
+    content: '···';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--bg);
+    padding: 0 1rem;
+    color: var(--text-muted);
+    font-size: 14px;
+    letter-spacing: 4px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ══════════════════════════════════════════
+       MASTER HEADER
+  ══════════════════════════════════════════ -->
+  <div class="master-header">
+    <div class="eyebrow">Equinox AI Platform · Combined Reference</div>
+    <h1>Team Session Notes</h1>
+    <p>Two sessions documented as a unified reference</p>
+    <div class="session-pills">
+      <div class="session-pill pill-s1">● Session 1 — AI Concepts: RAG, MCP, Agents & Workflows</div>
+      <div class="session-pill pill-s2">● Session 2 — Macy's Demo & Shopping MCP</div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       MASTER TABLE OF CONTENTS
+  ══════════════════════════════════════════ -->
+  <div class="master-toc">
+    <div class="toc-title">Contents</div>
+    <div class="toc-sessions">
+      <div class="toc-group s1">
+        <div class="toc-group-label s1">Session 1 — AI Concepts</div>
+        <ol>
+          <li><a href="#llm">What is an LLM?</a></li>
+          <li><a href="#rag">RAG — Retrieval-Augmented Generation</a></li>
+          <li><a href="#knowledge-base">Knowledge Base</a></li>
+          <li><a href="#mcp">MCP — Model Context Protocol</a></li>
+          <li><a href="#agent">What is an Agent?</a></li>
+          <li><a href="#guardrails">Guardrails</a></li>
+          <li><a href="#workflows">Workflows</a></li>
+          <li><a href="#orchestrator">Orchestrator / Supervisor Agent</a></li>
+        </ol>
+      </div>
+      <div class="toc-group s2">
+        <div class="toc-group-label s2">Session 2 — Macy's & Shopping MCP</div>
+        <ol>
+          <li><a href="#macys">Macy's Demo — Overview</a></li>
+          <li><a href="#how-it-works">How the Chatbot Works</a></li>
+          <li><a href="#virtual-tryon">Virtual Try-On & Image Generation</a></li>
+          <li><a href="#shopping-mcp">Shopping MCP — Concept & Architecture</a></li>
+          <li><a href="#current-vs-dedicated">Storefront MCP vs Dedicated Shopping MCP</a></li>
+          <li><a href="#techstack">Tech Stack & Deployment</a></li>
+          <li><a href="#actions">Action Items & Decisions</a></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════
+       SESSION 1
+  ══════════════════════════════════════════ -->
+  <div class="session-banner s1">
+    <div class="session-badge s1">S1</div>
+    <div class="session-banner-info">
+      <div class="session-banner-title">AI Concepts: RAG, MCP, Agents & Workflows</div>
+      <div class="session-banner-sub">Team training session — foundational concepts</div>
+    </div>
+  </div>
+
+  <!-- 1. LLM -->
+  <section id="llm">
+    <div class="section-header">
+      <span class="section-num s1">01</span>
+      <h2>What is an LLM?</h2>
+    </div>
+    <div class="card">
+      <p>An LLM (Large Language Model) is a model trained on a broad corpus of information. It understands general concepts — what a car looks like, that the sky is blue — but has <strong>no knowledge of your specific domain or private data.</strong></p>
+      <br>
+      <p><strong>Example:</strong> An LLM may know what a "product" or a "SKU" is in general terms, but it will not know what a catalog means in the context of Equinox, or the difference between a Sales Catalog and a Master Catalog, or any collection properties specific to your platform.</p>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- 2. RAG -->
+  <section id="rag">
+    <div class="section-header">
+      <span class="section-num s1">02</span>
+      <h2>RAG — Retrieval-Augmented Generation</h2>
+    </div>
+    <div class="card">
+      <h3>Definition</h3>
+      <p><span class="tag tag-green">R</span> Retrieval &nbsp;<span class="tag tag-blue">A</span> Augmentation &nbsp;<span class="tag tag-orange">G</span> Generation</p>
+      <br>
+      <p>When the LLM receives a query, it <strong>retrieves</strong> relevant data from an external source, <strong>augments</strong> (adds) that data to the input, and then <strong>generates</strong> a response. The retrieved data is called <em>context</em>.</p>
+    </div>
+    <div class="card">
+      <h3>How it works</h3>
+      <div class="flow">
+        <div class="flow-box">User Query</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-box">Retrieval from Vector Store</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-box">Context injected into LLM</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-box">Output generated</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- 3. Knowledge Base -->
+  <section id="knowledge-base">
+    <div class="section-header">
+      <span class="section-num s1">03</span>
+      <h2>Knowledge Base</h2>
+    </div>
+    <div class="card">
+      <h3>What it is</h3>
+      <p>The Knowledge Base is an <strong>external hard drive for the LLM</strong> — a dedicated store of domain-specific information the model can retrieve from, beyond what it was originally trained on.</p>
+    </div>
+    <div class="card">
+      <h3>How it's stored</h3>
+      <ul>
+        <li>All uploaded documents are converted into <strong>vector embeddings</strong> and stored in a <strong>vector store</strong>.</li>
+        <li>During a chat session, retrieval pulls the relevant embedded chunks and provides them back to the LLM as context.</li>
+        <li>Each agent or service can have its own dedicated knowledge base (e.g., Catalog Knowledge Base with developer portal documentation).</li>
+      </ul>
+    </div>
+    <div class="callout">
+      <p><strong>Maintenance note:</strong> Currently, documentation is manually pushed to the knowledge base. A future automation pipeline is planned to sync updates from the developer portal directly.</p>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- 4. MCP -->
+  <section id="mcp">
+    <div class="section-header">
+      <span class="section-num s1">04</span>
+      <h2>MCP — Model Context Protocol</h2>
+    </div>
+    <div class="card">
+      <h3>Purpose</h3>
+      <p>MCP is a <strong>middleware layer</strong> between your existing APIs and the LLM. Rather than connecting the LLM directly to raw APIs (which creates complexity), MCP wraps each service's APIs into structured <strong>tools</strong> the LLM can understand and invoke.</p>
+    </div>
+    <div class="card">
+      <h3>Structure</h3>
+      <ul>
+        <li>Each <strong>service</strong> (e.g., SFO, Catalog, Price) gets its own MCP.</li>
+        <li>Each <strong>API endpoint</strong> within that service is represented as a <strong>Tool</strong>.</li>
+        <li>Each tool carries metadata: what data the API needs, expected request body, and response format.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>How LLM uses it</h3>
+      <div class="flow">
+        <div class="flow-box">User question</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-box">LLM identifies best tool</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-box">LLM builds API request</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-box">API is called</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-box">Response returned</div>
+      </div>
+      <br>
+      <p><strong>Example:</strong> In SFO MCP, the <em>Load Products by Search Term</em> API is represented as a <em>search tool</em>. The LLM picks this tool when a search-related question arrives and auto-constructs the request.</p>
+    </div>
+    <div class="callout">
+      <p><strong>Key insight:</strong> MCP is generated by the <strong>Equinox MCP Generator</strong> and deployed as a separate service. Direct API-to-LLM integration is avoided because it is too complex and error-prone.</p>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- 5. Agent -->
+  <section id="agent">
+    <div class="section-header">
+      <span class="section-num s1">05</span>
+      <h2>What is an Agent?</h2>
+    </div>
+    <div class="card">
+      <h3>Definition</h3>
+      <p>Something is only called an <strong>Agent</strong> if it has all five of the following elements:</p>
+      <div class="five-elements">
+        <div class="element-chip"><span class="num">①</span><div class="elabel">LLM</div><div class="sub">The model/brain</div></div>
+        <div class="element-chip"><span class="num">②</span><div class="elabel">Memory</div><div class="sub">Short & long term</div></div>
+        <div class="element-chip"><span class="num">③</span><div class="elabel">Knowledge</div><div class="sub">Optional knowledge base</div></div>
+        <div class="element-chip"><span class="num">④</span><div class="elabel">Prompt</div><div class="sub">System instructions</div></div>
+        <div class="element-chip"><span class="num">⑤</span><div class="elabel">Tools</div><div class="sub">MCPs / APIs</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Memory Types</h3>
+      <ul>
+        <li><strong>Short-term memory:</strong> Within the current chat thread only.</li>
+        <li><strong>Long-term memory:</strong> Persisted facts about a user across sessions (e.g., "this user is an IT professional attending a meeting").</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Tool Scope = Agent Scope</h3>
+      <p>An agent can only do what its assigned tools allow. Give it catalog tools → catalog agent. Add pricing tools → it handles pricing too. Tools define the domain boundary.</p>
+    </div>
+    <div class="callout">
+      <p><strong>⚠️ Too many tools = worse performance.</strong> Every tool consumes tokens from the LLM's context window (~200k tokens for most models). Overloading an agent with tools leaves less context for actual reasoning, causing hallucinations. Keep agent tool sets focused and domain-specific.</p>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- 6. Guardrails -->
+  <section id="guardrails">
+    <div class="section-header">
+      <span class="section-num s1">06</span>
+      <h2>Guardrails</h2>
+    </div>
+    <div class="card">
+      <h3>What they are</h3>
+      <p>Guardrails are a <strong>screening layer</strong> placed both before and after the LLM — preventing harmful, inappropriate, or sensitive content from flowing in either direction.</p>
+    </div>
+    <div class="card">
+      <h3>Two layers of guardrails</h3>
+      <ul>
+        <li><strong>Input guardrail:</strong> Checks what the user sends to the LLM. Blocks harmful prompts (e.g., instructions for illegal activity, inappropriate content).</li>
+        <li><strong>Output guardrail:</strong> Checks what the LLM returns before it reaches the user. Masks or blocks PII — phone numbers, email IDs, personal data that should not be exposed.</li>
+      </ul>
+    </div>
+    <div class="flow" style="justify-content:center; padding: 1rem 0;">
+      <div class="flow-box" style="border-color: rgba(255,123,84,0.4); color: var(--accent3);">User Input</div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-box" style="border-color: rgba(255,123,84,0.4); color: var(--accent3);">Input Guardrail</div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-box">LLM</div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-box" style="border-color: rgba(255,123,84,0.4); color: var(--accent3);">Output Guardrail</div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-box" style="border-color: rgba(255,123,84,0.4); color: var(--accent3);">User Response</div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- 7. Workflows -->
+  <section id="workflows">
+    <div class="section-header">
+      <span class="section-num s1">07</span>
+      <h2>Workflows</h2>
+    </div>
+    <div class="card">
+      <h3>What they are</h3>
+      <p>Workflows are <strong>AI Process Automation</strong> — a sequence of steps defined upfront that the system executes automatically. Unlike chat, you don't need to manually prompt each step; the workflow knows what to do.</p>
+    </div>
+    <div class="card">
+      <h3>Three types of workflows</h3>
+      <ul>
+        <li><strong>Chat-based:</strong> Initiated and driven by a conversation. User chats with the workflow to generate output.</li>
+        <li><strong>Trigger-based:</strong> Fires automatically when a specific event occurs (e.g., a product is updated in the catalog).</li>
+        <li><strong>Schedule-based:</strong> Runs on a defined schedule (e.g., generate a product review report every night at 9 PM IST).</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Workflow Creation — Multi-Agent Builder</h3>
+      <p>Creating a workflow via the builder involves a <strong>supervisor agent</strong> coordinating four sub-agents:</p>
+      <ul>
+        <li><strong>Resource Explorer:</strong> Scans available agents, knowledge bases, MCPs, and tools.</li>
+        <li><strong>Workflow Designer:</strong> Designs the workflow as a JSON structure based on the supervisor's findings.</li>
+        <li><strong>Workflow Validator:</strong> Validates the generated JSON before activation.</li>
+        <li><strong>Workflow Tester:</strong> Runs a test round before activation (changes cannot be made post-activation).</li>
+      </ul>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- 8. Orchestrator -->
+  <section id="orchestrator">
+    <div class="section-header">
+      <span class="section-num s1">08</span>
+      <h2>Orchestrator / Supervisor Agent</h2>
+    </div>
+    <div class="card">
+      <h3>Pattern</h3>
+      <p>For complex domains (like Admin Assistant), a single agent with all tools would exceed the context limit. Instead, an <strong>Orchestrator Agent</strong> sits on top and routes requests to specialized sub-agents.</p>
+    </div>
+    <div class="card">
+      <h3>Example — Admin Orchestrator</h3>
+      <ul>
+        <li>Orchestrator receives any user input.</li>
+        <li>It identifies the right sub-agent (Catalog, Price, Inventory, etc.).</li>
+        <li>Delegates the task, gets the result, and presents the final answer.</li>
+        <li>Sub-agents stay focused — Catalog agent has ~30 catalog tools; Price agent has ~10 price tools.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Agent-to-Agent (Future)</h3>
+      <p>The platform is working toward <strong>Agent-to-Agent</strong> communication — where one agent can hand off to an entirely separate external agent (e.g., integrating with SendGrid directly via its MCP).</p>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════
+       SESSION DIVIDER
+  ══════════════════════════════════════════ -->
+  <hr class="session-divider">
+
+
+  <!-- ══════════════════════════════════════════
+       SESSION 2
+  ══════════════════════════════════════════ -->
+  <div class="session-banner s2">
+    <div class="session-badge s2">S2</div>
+    <div class="session-banner-info">
+      <div class="session-banner-title">Macy's Demo & Shopping MCP</div>
+      <div class="session-banner-sub">Team discussion — EQ Platform demo strategy & implementation</div>
+    </div>
+  </div>
+
+  <!-- S2-1. Macy's Overview -->
+  <section id="macys">
+    <div class="section-header">
+      <span class="section-num s2">01</span>
+      <h2>Macy's Demo — Overview</h2>
+    </div>
+    <div class="card">
+      <h3>What it is</h3>
+      <p>A <strong>standalone AI-powered fashion chatbot</strong> built as a proof-of-concept using scraped Macy's product data. Repo: <span class="tag tag-blue">EQ Platform Macy's Demo</span></p>
+    </div>
+    <div class="card">
+      <h3>Data</h3>
+      <ul>
+        <li><strong>~12,000 products</strong> and <strong>~93,000 SKUs</strong> scraped from Macy's website.</li>
+        <li>All 12,000 products converted into <strong>vector embeddings</strong> stored in a <strong>JSON file</strong> (no database — JSON was manageable at this scale).</li>
+        <li>Agent queries these indexes using <strong>cosine similarity</strong> to find relevant products.</li>
+      </ul>
+    </div>
+    <div class="callout">
+      <p><strong>Limitation:</strong> Macy's products have 30–50 SKUs per product. Equinox platform currently has a product-SKU combination limit, so full integration with Equinox store is blocked. Workaround: limit SKUs per product for new demos.</p>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- S2-2. How it Works -->
+  <section id="how-it-works">
+    <div class="section-header">
+      <span class="section-num s2">02</span>
+      <h2>How the Chatbot Works</h2>
+    </div>
+    <div class="card">
+      <h3>User Flow — Outfit Recommendation</h3>
+      <div class="flow">
+        <div class="flow-box">User states intent<br><small>(e.g. "outfit for interview")</small></div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-box">AI asks 1 clarifying question<br><small>(gender, occasion type)</small></div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-box">Cosine query on<br>12k product index</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-box">3 outfit recommendations<br>(one per category)</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-box">User selects &amp;<br>virtual try-on</div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Key Design Decisions in the Repo</h3>
+      <ul>
+        <li><strong>Ask only ONE clarifying question</strong> — multiple questions loop endlessly without producing results.</li>
+        <li><strong>Category-aware discovery:</strong> AI queries across men's/women's categories, accessories, belts, wallets, shoes and assembles a complete outfit.</li>
+        <li><strong>Discovery uses direct embedding query</strong> — not a tool call. Reads directly from the index, faster than going through an MCP tool.</li>
+        <li>Full agent instructions/prompt defined inside the Macy's demo repo.</li>
+      </ul>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- S2-3. Virtual Try-On -->
+  <section id="virtual-tryon">
+    <div class="section-header">
+      <span class="section-num s2">03</span>
+      <h2>Virtual Try-On & Image Generation</h2>
+    </div>
+    <div class="card">
+      <h3>Models Evaluated</h3>
+      <div class="model-compare">
+        <div class="model-card selected">
+          <div class="mname">Nano Banana 2 ✓ (Selected)</div>
+          <div class="mdesc">Gemini 3.1 Flash Image · $0.006/image · ~10 sec latency · 4K resolution</div>
+        </div>
+        <div class="model-card">
+          <div class="mname">Nano Banana Pro</div>
+          <div class="mdesc">Higher quality, higher cost — not used for this demo</div>
+        </div>
+        <div class="model-card">
+          <div class="mname">NOVA (AWS Bedrock)</div>
+          <div class="mdesc">Cheaper but poor output — faces unclear, colors/attire inconsistent</div>
+        </div>
+        <div class="model-card">
+          <div class="mname">Seed Dance</div>
+          <div class="mdesc">Good quality but Chinese company — not suitable for this use case</div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Current Status</h3>
+      <ul>
+        <li>Nano Banana 2 (Gemini Flash) is the preferred model — fast, cheap, good quality.</li>
+        <li>Latency: <strong>~10 seconds</strong> per try-on (vs 1–2 minutes seen in Aritzia demo).</li>
+        <li>Currently accessed via personal/Chrome account. Needs formal whitelisting.</li>
+      </ul>
+    </div>
+    <div class="callout">
+      <p><strong>Whitelisting needed:</strong> Access via AWS Bedrock (GCP model enablement) or Google Vertex AI. The Aritzia demo team has already started ISG discussions — sync with them and include our use case.</p>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- S2-4. Shopping MCP -->
+  <section id="shopping-mcp">
+    <div class="section-header">
+      <span class="section-num s2">04</span>
+      <h2>Shopping MCP — Concept & Architecture</h2>
+    </div>
+    <div class="card">
+      <h3>What it is</h3>
+      <p>A <strong>custom, handwritten MCP server</strong> purpose-built for the end-to-end shopping journey. Connects any LLM (Claude, ChatGPT, VS Code Copilot) directly to Equinox storefront APIs.</p>
+    </div>
+    <div class="card">
+      <h3>APIs included (~10 handpicked)</h3>
+      <ul>
+        <li>Product search</li>
+        <li>Add item to cart</li>
+        <li>Get customer address</li>
+        <li>Get customer payment details</li>
+        <li>Checkout</li>
+      </ul>
+      <p style="margin-top:0.6rem; font-size:13px; color: var(--text-muted);">Each API = one MCP Tool. LLM picks the right tool and constructs the API request itself.</p>
+    </div>
+    <div class="card">
+      <h3>MCP Apps (UI Layer)</h3>
+      <p>An additional UI layer bundled inside the MCP server. Instead of tabular/text output, tool responses render as <strong>visual product cards</strong>. This is the standard <em>MCP Apps</em> feature for visual output from tool calls.</p>
+    </div>
+    <div class="card">
+      <h3>Shopping Journey — B2C vs B2B</h3>
+      <div class="two-col">
+        <div style="background:var(--surface2); border:1px solid var(--border); border-radius:6px; padding:0.8rem;">
+          <div class="tag tag-blue" style="margin-bottom:0.5rem;">B2C</div>
+          <ul style="font-size:13px; padding-left:1rem;">
+            <li>Search product</li>
+            <li>Get details</li>
+            <li>Add to cart</li>
+            <li>Checkout</li>
+          </ul>
+        </div>
+        <div style="background:var(--surface2); border:1px solid var(--border); border-radius:6px; padding:0.8rem;">
+          <div class="tag tag-purple" style="margin-bottom:0.5rem;">B2B</div>
+          <ul style="font-size:13px; padding-left:1rem;">
+            <li>AI recommends items not ordered recently</li>
+            <li>"You might want to restock X"</li>
+            <li>Add recommended items to cart</li>
+            <li>Checkout with PO number</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="callout green">
+      <p><strong>Status:</strong> Built in TypeScript. Not yet deployed. Most code is done — deployment + minor optimizations remain.</p>
+    </div>
+    <div class="callout">
+      <p><strong>Pending optimization:</strong> Merge separate checkout tools (get address, get payment, checkout) into a single tool that accepts a B2B/B2C flag and handles the full flow internally.</p>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- S2-5. Current vs Dedicated -->
+  <section id="current-vs-dedicated">
+    <div class="section-header">
+      <span class="section-num s2">05</span>
+      <h2>Storefront MCP vs Dedicated Shopping MCP</h2>
+    </div>
+    <div class="card">
+      <h3>Current: Storefront MCP + Agent Swarm</h3>
+      <ul>
+        <li>Uses the generic Storefront MCP which has <strong>~200 tools</strong>.</li>
+        <li>Separate agents per domain: checkout agent, discovery agent, etc.</li>
+        <li>All sub-agents report to a Shopping Assistant agent.</li>
+        <li><strong>Problem:</strong> High latency — round-trip communication between multiple agents adds delay.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Proposed: Dedicated Shopping MCP</h3>
+      <ul>
+        <li>Single MCP server with only the ~10 APIs needed for the shopping journey.</li>
+        <li>One agent talks directly to this MCP — no multi-hop agent routing.</li>
+        <li><strong>Benefit:</strong> Faster responses, simpler architecture, less hallucination risk.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Fallback Plan</h3>
+      <p>If Shopping MCP deployment is delayed, the Macy's repo can be adapted to work as an agent using existing MCPs. Discovery (embedding-based) and outfit curation are the only unique capabilities Macy's has over direct MCP usage.</p>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- S2-6. Tech Stack -->
+  <section id="techstack">
+    <div class="section-header">
+      <span class="section-num s2">06</span>
+      <h2>Tech Stack & Deployment</h2>
+    </div>
+    <div class="card">
+      <h3>Current Stack</h3>
+      <ul>
+        <li><strong>Language:</strong> TypeScript (both Macy's demo and Shopping MCP)</li>
+        <li><strong>No LangChain / LangGraph</strong> — not using the AI Studio framework here</li>
+        <li><strong>MCP Apps UI:</strong> HTML + CSS (must stay TypeScript since UI is bundled)</li>
+        <li><strong>Deployment:</strong> Standalone Node app — currently on a repurposed node/port; needs proper DevOps setup</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Python Conversion?</h3>
+      <p>Converting Shopping MCP to Python is possible, but MCP Apps (the UI layer) requires HTML/CSS, which ties it to TypeScript. Demo/POC work can continue in TypeScript; production must align to the standard Equinox stack.</p>
+    </div>
+    <div class="callout purple">
+      <p><strong>Productization rule:</strong> When moving from demo to production, everything must align to the standard Equinox tech stack. No multiple tech stacks in production.</p>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- S2-7. Action Items -->
+  <section id="actions">
+    <div class="section-header">
+      <span class="section-num s2">07</span>
+      <h2>Action Items & Decisions</h2>
+    </div>
+
+    <div class="action-item">
+      <span class="action-owner tag tag-orange">KR / Sunit</span>
+      <div class="action-text">Deploy Shopping MCP with DevOps help. Push to master branch. Hand off to Neeraj's team post-deployment. Optimizations to be done by receiving team.</div>
+    </div>
+
+    <div class="action-item">
+      <span class="action-owner tag tag-blue">Neeraj & Team</span>
+      <div class="action-text">Go through the Macy's demo repo and Shopping MCP repo. Understand the code. Estimated onboarding: ~1 day. Reach out for clarifications as needed.</div>
+    </div>
+
+    <div class="action-item">
+      <span class="action-owner tag tag-blue">Neeraj & Team</span>
+      <div class="action-text">Enhance Macy's demo to integrate with Equinox store. Limit SKUs per product to work within current platform constraints.</div>
+    </div>
+
+    <div class="action-item">
+      <span class="action-owner tag tag-green">Team</span>
+      <div class="action-text">Initiate whitelisting of Nano Banana (Gemini Flash Image) — either via AWS Bedrock (GCP model access) or Google Vertex AI. Sync with Aritzia demo team on ISG discussions and include our use case.</div>
+    </div>
+
+    <div class="action-item">
+      <span class="action-owner tag tag-orange">KR / Mike</span>
+      <div class="action-text">Discuss Shopping MCP productization plan with Kishan. Determine if Macy's-style agent gets built on top of Shopping MCP or remains standalone.</div>
+    </div>
+
+    <div class="action-item">
+      <span class="action-owner tag tag-green">Team</span>
+      <div class="action-text">Identify a proper node/port and deployment configuration for the Macy's standalone app (current deployment is on a repurposed temporary node).</div>
+    </div>
+
+    <div class="callout blue">
+      <p><strong>Priority order agreed:</strong> (1) Deploy Shopping MCP → (2) Hand off to Neeraj's team → (3) Continue Macy's demo work in parallel → (4) Revisit productization after Kishan call.</p>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
